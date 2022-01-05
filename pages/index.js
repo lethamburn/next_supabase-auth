@@ -9,6 +9,11 @@ export default function Home() {
   const [session, setSession] = useState(null);
   useEffect(() => {
     setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+      setSession(session);
+    });
   }, []);
   return (
     <div className={styles.container}>
